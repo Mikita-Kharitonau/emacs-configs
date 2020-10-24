@@ -91,20 +91,48 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
+ '(company-quickhelp-color-background "#4F4F4F")
+ '(company-quickhelp-color-foreground "#DCDCCC")
+ '(counsel-projectile-mode t nil (counsel-projectile))
  '(custom-safe-themes
-   (quote
-    ("c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" default)))
- '(display-line-numbers-type (quote relative))
+   '("939ea070fb0141cd035608b2baabc4bd50d8ecc86af8528df9d41f4d83664c6a" "aded61687237d1dff6325edb492bde536f40b048eab7246c61d5c6643c696b7f" "6b80b5b0762a814c62ce858e9d72745a05dd5fc66f821a1c5023b4f2a76bc910" "f2c35f8562f6a1e5b3f4c543d5ff8f24100fae1da29aeb1864bbc17758f52b70" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" default))
+ '(display-line-numbers-type 'relative)
  '(doom-modeline-modal-icon nil)
+ '(fci-rule-color "#343d46")
  '(global-display-line-numbers-mode t)
+ '(initial-frame-alist '((fullscreen . maximized)))
  '(lsp-metals-server-command "/usr/local/bin/metals-emacs")
  '(lsp-ui-doc-enable nil)
- '(lsp-ui-doc-position (quote top))
+ '(lsp-ui-doc-position 'top)
  '(lsp-ui-sideline-delay 0.2)
  '(lsp-ui-sideline-show-hover t)
+ '(nrepl-message-colors
+   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(package-selected-packages
-   (quote
-    (all-the-icons-ivy ivy-pass ivy-rich counsel ivy evil company-lsp yasnippet lsp-ui lsp-metals lsp-mode flycheck sbt-mode scala-mode use-package))))
+   '(magit counsel-projectile projectile spacegray-theme zenburn-theme all-the-icons-ivy ivy-pass ivy-rich counsel ivy evil company-lsp yasnippet lsp-ui lsp-metals lsp-mode flycheck sbt-mode scala-mode use-package))
+ '(pdf-view-midnight-colors '("#fdf4c1" . "#32302f"))
+ '(projectile-mode t nil (projectile))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   '((20 . "#bf616a")
+     (40 . "#DCA432")
+     (60 . "#ebcb8b")
+     (80 . "#B4EB89")
+     (100 . "#89EBCA")
+     (120 . "#89AAEB")
+     (140 . "#C189EB")
+     (160 . "#bf616a")
+     (180 . "#DCA432")
+     (200 . "#ebcb8b")
+     (220 . "#B4EB89")
+     (240 . "#89EBCA")
+     (260 . "#89AAEB")
+     (280 . "#C189EB")
+     (300 . "#bf616a")
+     (320 . "#DCA432")
+     (340 . "#ebcb8b")
+     (360 . "#B4EB89")))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -285,9 +313,38 @@
   (tool-bar-mode -1)              ; Disable the tool bar
   (tooltip-mode -1))              ; Disable the tooltips
 
+;;;;;;;;;;;;;;
 ;; Enable Evil
-  (require 'evil)
-  (evil-mode 1)
+;;;;;;;;;;;;;;
+
+;; Download
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
+
+;; Enable
+(require 'evil)
+(evil-mode 1)
+
+;;;;;;;;;;;;;;;;;;;;;
+;; END OF ENABLE EVIL
+;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;
+;; Setup projectile
+;;;;;;;;;;;;;;;;;;;
+
+(unless (package-installed-p 'projectile)
+  (package-install 'projectile))
+
+(unless (package-installed-p 'counsel-projectile)
+    (package-install 'counsel-projectile))
+
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; END OF Setup projectile
+;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Close buffer without asking questions
   (global-set-key (kbd "C-x k") 'kill-current-buffer)
@@ -301,3 +358,5 @@
 (global-set-key (kbd "s-f") 'lsp-format-buffer)
 ;; Setup goto definition
 (global-set-key (kbd "s-b") 'lsp-find-definition)
+;; Setup peek find references
+(global-set-key (kbd "s-r") 'lsp-ui-peek-find-references)

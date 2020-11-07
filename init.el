@@ -1,3 +1,10 @@
+;;; init.el --- Emacs config.
+
+;;; Commentary:
+
+;;  Emacs Startup File.
+
+;;; Code:
 (require 'package)
 
 ;; Add melpa to your packages repositories
@@ -12,9 +19,7 @@
 
 (require 'use-package)
 
-;;;;;;;;;;;;;;
-;; METALS PART
-;;;;;;;;;;;;;;
+;; {{{ METALS PART
 
 ;; Enable defer and ensure by default for use-package
 ;; Keep auto-save/backup files separate from source code:  https://github.com/scalameta/metals/issues/1027
@@ -57,7 +62,12 @@
   :config (setq lsp-metals-treeview-show-when-views-received t))
 
 ;; Enable nice rendering of documentation on hover
-(use-package lsp-ui)
+(use-package lsp-ui
+  :init (setq lsp-ui-doc-enable t
+	      lsp-ui-doc-position 'top
+	      lsp-ui-sideline-ignore-duplicate t
+	      )
+);;  :config (setq lsp-ui-doc-enable nil))
 
 ;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
 ;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
@@ -77,72 +87,12 @@
   (lsp-mode . dap-ui-mode)
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;
-;; END OF THE METALS PART
-;;;;;;;;;;;;;;;;;;;;;;;;;
+;; }}} END OF THE METALS PART
 
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(company-quickhelp-color-background "#4F4F4F")
- '(company-quickhelp-color-foreground "#DCDCCC")
- '(counsel-projectile-mode t nil (counsel-projectile))
- '(custom-safe-themes
-   '("939ea070fb0141cd035608b2baabc4bd50d8ecc86af8528df9d41f4d83664c6a" "aded61687237d1dff6325edb492bde536f40b048eab7246c61d5c6643c696b7f" "6b80b5b0762a814c62ce858e9d72745a05dd5fc66f821a1c5023b4f2a76bc910" "f2c35f8562f6a1e5b3f4c543d5ff8f24100fae1da29aeb1864bbc17758f52b70" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" default))
- '(display-line-numbers-type 'relative)
- '(doom-modeline-modal-icon nil)
- '(fci-rule-color "#343d46")
- '(global-display-line-numbers-mode t)
- '(initial-frame-alist '((fullscreen . maximized)))
- '(lsp-metals-server-command "/usr/local/bin/metals-emacs")
- '(lsp-ui-doc-enable nil)
- '(lsp-ui-doc-position 'top)
- '(lsp-ui-sideline-delay 0.2)
- '(lsp-ui-sideline-show-hover t)
- '(nrepl-message-colors
-   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
- '(package-selected-packages
-   '(magit counsel-projectile projectile spacegray-theme zenburn-theme all-the-icons-ivy ivy-pass ivy-rich counsel ivy evil company-lsp yasnippet lsp-ui lsp-metals lsp-mode flycheck sbt-mode scala-mode use-package))
- '(pdf-view-midnight-colors '("#fdf4c1" . "#32302f"))
- '(projectile-mode t nil (projectile))
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   '((20 . "#bf616a")
-     (40 . "#DCA432")
-     (60 . "#ebcb8b")
-     (80 . "#B4EB89")
-     (100 . "#89EBCA")
-     (120 . "#89AAEB")
-     (140 . "#C189EB")
-     (160 . "#bf616a")
-     (180 . "#DCA432")
-     (200 . "#ebcb8b")
-     (220 . "#B4EB89")
-     (240 . "#89EBCA")
-     (260 . "#89AAEB")
-     (280 . "#C189EB")
-     (300 . "#bf616a")
-     (320 . "#DCA432")
-     (340 . "#ebcb8b")
-     (360 . "#B4EB89")))
- '(vc-annotate-very-old-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; IVY PART https://github.com/rememberYou/.emacs.d/blob/master/config.org#ivy
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; {{{ IVY PART https://github.com/rememberYou/.emacs.d/blob/master/config.org#ivy
 
 (use-package counsel
   :after ivy
@@ -154,7 +104,7 @@
          ("C-x C-u" . counsel-unicode-char)
          ("C-x C-v" . counsel-set-variable))
   :config (counsel-mode)
-  :custom (counsel-rg-base-command "rg -S -M 150 --no-heading --line-number --color never %s"))
+  :custom (counsel-rg-base-command "/usr/local/bin/rg -S -M 150 --no-heading --line-number --color never %s"))
 
 (use-package ivy
   :delight
@@ -259,11 +209,11 @@
                 (ivy-rich-file-modes              (:width 11 :face font-lock-doc-face))
                 (ivy-rich-file-size               (:width 7 :face font-lock-doc-face))
                 (ivy-rich-file-last-modified-time (:width 30 :face font-lock-doc-face)))))
-  (plist-put ivy-rich-display-transformers-list
-             'counsel-projectile-switch-project
-             '(:columns
-               ((ivy-rich-branch-candidate        (:width 80))
-                (ivy-rich-compiling))))
+  ;;(plist-put ivy-rich-display-transformers-list
+  ;;           'counsel-projectile-switch-project
+  ;;           '(:columns
+  ;;             ((ivy-rich-branch-candidate        (:width 80))
+  ;;              (ivy-rich-compiling))))
   (plist-put ivy-rich-display-transformers-list
              'ivy-switch-buffer
              '(:columns
@@ -289,23 +239,15 @@
          :map swiper-map
          ("M-%" . swiper-query-replace)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; THE END OF IVY PART
-;;;;;;;;;;;;;;;;;;;;;;;;
+;; }}} THE END OF IVY PART
 
-;;;;;;;;;;;;;;;;
-;; DOOM MODELINE
-;;;;;;;;;;;;;;;;
+;; {{{ DOOM MODELINE
 (use-package doom-modeline
   :ensure t
  :init (doom-modeline-mode 1))
 
 (setq doom-modeline-height 20)
-'(doom-modeline-modal-icon nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;; END OF DOOM MODELINE
-;;;;;;;;;;;;;;;;;;;;;;;
+;; }}} END OF DOOM MODELINE
 
 ;; Disable mouse interface
 (when window-system
@@ -313,25 +255,26 @@
   (tool-bar-mode -1)              ; Disable the tool bar
   (tooltip-mode -1))              ; Disable the tooltips
 
-;;;;;;;;;;;;;;
-;; Enable Evil
-;;;;;;;;;;;;;;
+;; {{{ Evil
 
-;; Download
+;;(use-package evil
+;;  :ensure t
+;;  :config
+;;  (evil-mode 1)
+;;  (define-key evil-motion-state-map (kbd "RET") nil))
 (unless (package-installed-p 'evil)
   (package-install 'evil))
 
-;; Enable
 (require 'evil)
 (evil-mode 1)
 
-;;;;;;;;;;;;;;;;;;;;;
-;; END OF ENABLE EVIL
-;;;;;;;;;;;;;;;;;;;;;
+;; Unmap RET
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd "RET") nil))
 
-;;;;;;;;;;;;;;;;;;;
-;; Setup projectile
-;;;;;;;;;;;;;;;;;;;
+;; }}} End of evil
+
+;; {{{ Setup projectile
 
 (unless (package-installed-p 'projectile)
   (package-install 'projectile))
@@ -342,15 +285,36 @@
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; END OF Setup projectile
-;;;;;;;;;;;;;;;;;;;;;;;;;;
+(projectile-add-known-project "~/Projects/live-baccarat")
+(projectile-add-known-project "~/Projects/baccarat-domain")
+(projectile-add-known-project "~/Projects/coreservices")
+(projectile-add-known-project "~/Projects/baccarat-dwh-events-producer")
+(projectile-add-known-project "~/Projects/players")
+(projectile-add-known-project "~/Projects/dictionaries")
+(projectile-add-known-project "~/Projects/LAS-P-lightbend-akka-for-scala-professional-v1")
+(projectile-add-known-project "~/Projects/cats-sandbox")
+(projectile-add-known-project "~/Projects/common-features")
+(projectile-add-known-project "~/Projects/rng-service-extras")
+
+;; }}} END OF Setup projectile
+
+;; GIT GUTTER
+(use-package git-gutter
+  :ensure t
+  :init
+  (global-git-gutter-mode +1))
 
 ;; Close buffer without asking questions
   (global-set-key (kbd "C-x k") 'kill-current-buffer)
 
 ;; Disable bell
   (setq ring-bell-function 'ignore)
+
+;; Setup autosave on disc
+(auto-save-visited-mode t)
+
+;; Highlight brackets
+(show-paren-mode +1)
 
 ;; Setup autocompletion
 (global-set-key (kbd "C-SPC") 'company-complete)
@@ -360,3 +324,23 @@
 (global-set-key (kbd "s-b") 'lsp-find-definition)
 ;; Setup peek find references
 (global-set-key (kbd "s-r") 'lsp-ui-peek-find-references)
+;; Setup treemacs toggle key binding
+(global-set-key (kbd "C-x C-t") 'treemacs)
+
+;; Setup windmove
+(windmove-default-keybindings)
+
+;; Setup intend for js and json
+(setq js-indent-level 2)
+
+
+;; Setup folding
+(use-package vimish-fold
+  :ensure t
+  :config (vimish-fold-global-mode t))
+
+;; File to write custom-set-variables.
+(setq custom-file "~/.emacs.d/custom.el")
+(unless (file-exists-p custom-file)
+  (write-region "" nil custom-file))
+(load custom-file)

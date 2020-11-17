@@ -59,7 +59,7 @@
 
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals
-  :config (setq lsp-metals-treeview-show-when-views-received t))
+  :config (setq lsp-metals-treeview-show-when-views-received nil))
 
 ;; Enable nice rendering of documentation on hover
 (use-package lsp-ui
@@ -344,3 +344,12 @@
 (unless (file-exists-p custom-file)
   (write-region "" nil custom-file))
 (load custom-file)
+
+;; Editorconfig
+(use-package editorconfig
+  :demand t
+  :config
+  (editorconfig-mode 1))
+
+(provide 'init)
+;;; init.el ends here

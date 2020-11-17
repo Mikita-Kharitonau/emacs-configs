@@ -10,8 +10,9 @@
  '(doom-modeline-modal-icon nil)
  '(global-display-line-numbers-mode t)
  '(initial-frame-alist '((fullscreen . maximized)))
- '(lsp-headerline-breadcrumb-segments '(file symbols))
+ '(lsp-headerline-breadcrumb-segments '(symbols))
  '(lsp-metals-server-command "/usr/local/bin/metals-emacs")
+ '(lsp-metals-show-implicit-arguments nil)
  '(lsp-metals-treeview-logging t)
  '(lsp-ui-doc-alignment 'window)
  '(lsp-ui-doc-border "dark cyan")
@@ -22,7 +23,7 @@
  '(lsp-ui-sideline-diagnostic-max-lines 5)
  '(lsp-ui-sideline-show-hover t)
  '(package-selected-packages
-   '(vimish-fold git-gutter treemacs-projectile magit counsel-projectile projectile spacegray-theme zenburn-theme all-the-icons-ivy ivy-pass ivy-rich counsel ivy evil company-lsp yasnippet lsp-ui lsp-metals lsp-mode flycheck sbt-mode scala-mode use-package))
+   '(editorconfig vimish-fold git-gutter treemacs-projectile magit counsel-projectile projectile spacegray-theme zenburn-theme all-the-icons-ivy ivy-pass ivy-rich counsel ivy evil company-lsp yasnippet lsp-ui lsp-metals lsp-mode flycheck sbt-mode scala-mode use-package))
  '(treemacs-width 50))
 
 (custom-set-faces

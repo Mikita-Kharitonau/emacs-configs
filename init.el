@@ -295,6 +295,7 @@
 (projectile-add-known-project "~/Projects/cats-sandbox")
 (projectile-add-known-project "~/Projects/common-features")
 (projectile-add-known-project "~/Projects/rng-service-extras")
+(projectile-add-known-project "~/Projects/loadtest")
 
 ;; }}} END OF Setup projectile
 
@@ -324,6 +325,8 @@
 (global-set-key (kbd "s-b") 'lsp-find-definition)
 ;; Setup peek find references
 (global-set-key (kbd "s-r") 'lsp-ui-peek-find-references)
+;; Toggle lsp breadcrumbs
+;; (global-set-key (kbd "s-l t b") 'lsp-headerline-breadcrumb-mode)
 ;; Setup treemacs toggle key binding
 (global-set-key (kbd "C-x C-t") 'treemacs)
 
@@ -351,5 +354,18 @@
   :config
   (editorconfig-mode 1))
 
+;; Toggle time and system load
+(display-time-mode 1)
+
+;; Update buffers according to file on disk
+(global-auto-revert-mode t)
+
+(use-package base16-theme
+  :demand
+  :ensure t
+  :config
+  (load-theme 'base16-ocean t))
+
 (provide 'init)
+
 ;;; init.el ends here

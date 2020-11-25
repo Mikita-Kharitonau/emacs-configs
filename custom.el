@@ -31,6 +31,28 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-scrollbar-bg ((t (:background "gray93"))))
- '(lsp-ui-doc-background ((t (:background "gray93"))))
- '(lsp-ui-sideline-code-action ((t (:foreground "DarkOrange1")))))
+ '(ivy-current-match ((t (:extend t :background "#343d46" :foreground "light green"))))
+ '(lsp-ui-peek-filename ((t (:foreground "#C0C4CE"))))
+ '(lsp-ui-peek-header ((t (:background "#343D46" :foreground "#C0C4CE"))))
+ '(lsp-ui-peek-highlight ((t (:background "#DEBD7B" :distant-foreground "white" :foreground "black"))))
+ '(lsp-ui-peek-list ((t (:background "#252a36"))))
+ '(lsp-ui-peek-peek ((t (:background "#252a36"))))
+ '(lsp-ui-peek-selection ((t (:background "#343D46" :foreground "#C0C4CE")))))
+
+;; Sublime Spacegray Ocean colors
+;; '(:base00 "#2A303C"
+;;    :base01 "#343d46"
+;;    :base02 "#4f5b66"
+;;    :base03 "#5E6E7A"
+;;    :base04 "#a7adba"
+;;    :base05 "#EFF1F5"
+;;    :base06 "#dfe1e8"
+;;    :base07 "#eff1f5"
+;;    :base08 "#BF5664"
+;;    :base09 "#DC836B"
+;;    :base0A "#DFBD7B"
+;;    :base0B "#9CBF86"
+;;    :base0C "#96b5b4"
+;;    :base0D "#8fa1b3"
+;;    :base0E "#B284A7"
+;;    :base0F "#ab7967")

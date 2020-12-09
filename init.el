@@ -360,6 +360,9 @@
 ;; Update buffers according to file on disk
 (global-auto-revert-mode t)
 
+;; https://emacs-lsp.github.io/lsp-mode/page/performance/#ignore-watch-foldersfiles
+(setq lsp-enable-file-watchers nil)
+
 (use-package base16-theme
   :demand
   :ensure t

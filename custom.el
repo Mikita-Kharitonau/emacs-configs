@@ -7,6 +7,7 @@
  '(company-minimum-prefix-length 1)
  '(counsel-projectile-mode t nil (counsel-projectile))
  '(display-line-numbers-type 'relative)
+ '(display-time-default-load-average nil)
  '(doom-modeline-modal-icon nil)
  '(global-display-line-numbers-mode t)
  '(initial-frame-alist '((fullscreen . maximized)))
@@ -20,7 +21,7 @@
  '(lsp-ui-doc-max-width 90)
  '(lsp-ui-peek-list-width 90)
  '(lsp-ui-sideline-delay 0.2)
- '(lsp-ui-sideline-diagnostic-max-lines 5)
+ '(lsp-ui-sideline-diagnostic-max-lines 20)
  '(lsp-ui-sideline-show-hover t)
  '(package-selected-packages
    '(editorconfig vimish-fold git-gutter treemacs-projectile magit counsel-projectile projectile spacegray-theme zenburn-theme all-the-icons-ivy ivy-pass ivy-rich counsel ivy evil company-lsp yasnippet lsp-ui lsp-metals lsp-mode flycheck sbt-mode scala-mode use-package))
@@ -31,13 +32,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ivy-current-match ((t (:extend t :background "#343d46" :foreground "light green"))))
+ '(ivy-current-match ((t (:extend t :background "#343d46" :foreground "#EFF0F4"))))
+ '(ivy-minibuffer-match-face-2 ((t (:foreground "#DEBD7B"))))
  '(lsp-ui-peek-filename ((t (:foreground "#C0C4CE"))))
  '(lsp-ui-peek-header ((t (:background "#343D46" :foreground "#C0C4CE"))))
  '(lsp-ui-peek-highlight ((t (:background "#DEBD7B" :distant-foreground "white" :foreground "black"))))
  '(lsp-ui-peek-list ((t (:background "#252a36"))))
  '(lsp-ui-peek-peek ((t (:background "#252a36"))))
- '(lsp-ui-peek-selection ((t (:background "#343D46" :foreground "#C0C4CE")))))
+ '(lsp-ui-peek-selection ((t (:background "#343D46" :foreground "#EFF1F5")))))
 
 ;; Sublime Spacegray Ocean colors
 ;; '(:base00 "#2A303C"
@@ -45,7 +47,7 @@
 ;;    :base02 "#4f5b66"
 ;;    :base03 "#5E6E7A"
 ;;    :base04 "#a7adba"
-;;    :base05 "#EFF1F5"
+;;    :base05 "#c0c5ce"
 ;;    :base06 "#dfe1e8"
 ;;    :base07 "#eff1f5"
 ;;    :base08 "#BF5664"

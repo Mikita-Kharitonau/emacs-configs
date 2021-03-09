@@ -55,7 +55,9 @@
   ;; Optional - enable lsp-mode automatically in scala files
   :hook  (scala-mode . lsp)
          (lsp-mode . lsp-lens-mode)
-  :config (setq lsp-prefer-flymake nil))
+  :config (setq lsp-prefer-flymake nil)
+  :custom
+      (lsp-headerline-breadcrumb-enable nil))
 
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals
@@ -289,8 +291,6 @@
 (projectile-add-known-project "~/Projects/baccarat-domain")
 (projectile-add-known-project "~/Projects/coreservices")
 (projectile-add-known-project "~/Projects/baccarat-dwh-events-producer")
-(projectile-add-known-project "~/Projects/players")
-(projectile-add-known-project "~/Projects/dictionaries")
 (projectile-add-known-project "~/Projects/LAS-P-lightbend-akka-for-scala-professional-v1")
 (projectile-add-known-project "~/Projects/cats-sandbox")
 (projectile-add-known-project "~/Projects/common-features")
@@ -360,14 +360,49 @@
 ;; Update buffers according to file on disk
 (global-auto-revert-mode t)
 
-;; https://emacs-lsp.github.io/lsp-mode/page/performance/#ignore-watch-foldersfiles
-(setq lsp-enable-file-watchers nil)
+;; https://emacs-lsp.github.io/lsp-mode/page/performance
+;; (setq lsp-enable-file-watchers nil)
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
+;; Font ligatures
+(when (window-system)
+  (set-frame-font "Fira Code"))
+(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+               (36 . ".\\(?:>\\)")
+               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (48 . ".\\(?:x[a-zA-Z]\\)")
+               (58 . ".\\(?:::\\|[:=]\\)")
+               (59 . ".\\(?:;;\\|;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+               (91 . ".\\(?:]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (119 . ".\\(?:ww\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+               )
+             ))
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
 (use-package base16-theme
-  :demand
-  :ensure t
-  :config
-  (load-theme 'base16-ocean t))
+ :demand
+ :ensure t
+ :config
+ (load-theme 'base16-ocean t))
 
 (provide 'init)
 

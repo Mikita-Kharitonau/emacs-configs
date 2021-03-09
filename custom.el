@@ -7,6 +7,7 @@
  '(company-minimum-prefix-length 1)
  '(counsel-projectile-mode t nil (counsel-projectile))
  '(display-line-numbers-type 'relative)
+ '(display-line-numbers-width-start t)
  '(display-time-default-load-average nil)
  '(doom-modeline-modal-icon nil)
  '(global-display-line-numbers-mode t)
@@ -58,3 +59,10 @@
 ;;    :base0D "#8fa1b3"
 ;;    :base0E "#B284A7"
 ;;    :base0F "#ab7967")
+
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(lsp-ui-doc-background ((t (:background "#fafafa")))))
